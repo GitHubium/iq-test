@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <style>
+html, body {
+  margin: 0;
+  overflow: hidden;
+}
+.title {
+  color: gray
+}
+.myBtn {
+  max-width: 100px;
+}
+.joy {
+  position: absolute;
+  display: block;
+  font-size: 50px;
+  z-index: -1;
+}
+  </style>
+</head>
+<body>
+  <div class="container page page-1" style="display: block;">
+    <div class="row" style="margin-top: 30px">
+      <h1 class="title">Squishy's IQ Test (Beta)</h1>
+      <hr/>
+      <br><br>
+      <h3>Question 1 of 18</h3>
+      <p>Do you play Fortnite?</p>
+      <form>
+        <input type="checkbox" id="answer1" name="yes" value="yes">
+        <label for="answer1">yes i play fortnite</label><br>
+        <input type="checkbox" id="answer2" name="no" value="no">
+        <label for="answer2">No</label><br>
+      </form>
+      <br><br><br>
+      <button class="myBtn" disabled>Previous</button>
+      <button class="myBtn" onclick="onNext()">Next</button>
+    </div>
+  </div>
+  <div class="container page page-2">
+    <div class="text-center">
+      <p>Good choice 👍</p>
+      <p>Your IQ is 200</p>
+      <p><a href="#" onclick="alert('just reload the page idiot')">Back</a></p>
+    </div>
+  </div>
+  <div class="container page page-3">
+    <div id="joys"></div>
+
+    <div class="text-center" style="margin-top: 15%;">
+      <h1 class="rainbow">Your IQ is -69.420</h1>
+      <h4>List of things smorter than you</h4>
+      <ol>
+        <li>amazon alexa</li>
+        <li>your frends XD</li>
+        <li>tiktok lol</li>
+        <li>among us imposter</li>
+        <li>logan paul</li>
+        <li><a target="_blank" href="https://incubator.wikimedia.org/wiki/Wp/enm/Frogge">frogge</a></li>
+      </ol>
+    </div>
+  </div>
+
+
+</body>
+<script>
+let page = 1
+
+document.getElementsByClassName("page-2")[0].style.display="none"
+document.getElementsByClassName("page-3")[0].style.display="none"
+
+let joyX = window.innerWidth/2
+let joyY = window.innerHeight/2
+let velX = Math.PI*10;
+let velY = 20;
+
+function onNext() {
+  let binRep = document.getElementById("answer1").checked * 2 + document.getElementById("answer2").checked
+  switch (binRep) {
+    case 0:{
+      alert("bro make up your mind")
+      break;
+    }
+    case 1:{
+      document.getElementsByClassName("page-1")[0].style.display="none"
+      document.getElementsByClassName("page-2")[0].style.display="block"
+      page=2
+      break;
+    }
+    case 2:{
+      document.getElementsByClassName("page-1")[0].style.display="none"
+      document.getElementsByClassName("page-3")[0].style.display="block"
+      page=3
+      break;
+    }
+    case 3:{
+      alert("amogus")
+      alert("Lmao")
+      break;
+    }
+  }
+}
+
+setInterval(() => {
+  if (page === 3) {
+    joyX += velX
+    joyY += velY
+    if (joyX < 0 || joyX > window.innerWidth) {
+      velX *= -1
+    }
+    if (joyY < 0 || joyY > window.innerHeight) {
+      velY *= -1
+    }
+
+    let ele = document.getElementById("joys")
+    if (ele.childNodes.length<100) {
+      ele.innerHTML += `<p class='joy' style='top:${joyY}px;left:${joyX}px'>😂</p>`
+    } else {
+      ele.childNodes[Math.floor(Math.random()*ele.childNodes.length)].style=`top:${joyY}px;left:${joyX}px`
+    }
+    //😂 😹 
+
+    eles = document.getElementsByClassName('rainbow')
+    console.log(eles)
+    for(let i = 0; i < eles.length; i ++) {
+      let child = eles[i]
+      child.style.color=`rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`
+    }
+  }
+}, 20)
+
+</script>
+</html>
